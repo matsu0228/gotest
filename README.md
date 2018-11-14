@@ -9,5 +9,6 @@
 
 ## integrate test
 
+* unit test with mocking
 * integrate test with build tag
 * integrate test with docker
