@@ -26,6 +26,7 @@ func NewDatabase(user, pass, host, port, dbname, option string) (Database, error
 	const createdFormat = `2006-01-02 15:04:05` // +0700 JST`
 
 	connectQuery := generateDatabaseQuery(user, pass, host, port, dbname, option)
+	log.Printf("[INFO] connectQuery: %v", connectQuery)
 	databaseConn, err := sqlx.Connect("mysql", connectQuery)
 	if err != nil {
 		return Database{}, err

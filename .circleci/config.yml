@@ -1,0 +1,57 @@
+# Golang CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-go/ for more details
+version: 2
+jobs:
+  build:
+    docker:
+      # specify the version
+      - image: circleci/golang:1.9
+      # documented at https://circleci.com/docs/2.0/circleci-images/
+      - image: circleci/mysql:5.7
+        environment:
+          MYSQL_ROOT_PASSWORD: mysql
+          # MYSQL_ALLOW_EMPTY_PASSWORD: yes
+          MYSQL_DATABASE: todo
+        command: [--character-set-server=utf8, --collation-server=utf8_general_ci]
+
+    #### TEMPLATE_NOTE: go expects specific checkout path representing url
+    working_directory: /go/src/github.com/matsu0228/gotest
+    steps:
+      - run: echo 'export PATH=${GOPATH}/bin/:${PATH}' >> $BASH_ENV
+      - checkout
+      # specify any bash command here prefixed with `run: `
+      # ======================================================
+      #
+      # - run: go get -u github.com/golang/dep/cmd/dep
+      ##  debug --------------------------------
+      # - run: pwd
+      # - run: echo $GOPATH
+       
+      ## setup --------------------------------
+      # - run: dep ensure -v
+      - run:
+          name: Waiting for Database to be ready
+          command: |
+            for i in `seq 1 10`;
+            do
+              nc -z 127.0.0.1 3306 && echo Success && exit 0
+              echo -n .
+              sleep 1
+            done
+            echo Failed waiting for mysql && exit 1
+      # - run: dockerize -wait` tcp://127.0.0.1:3306 -timeout 1m
+      - run:  go run infla/init/main.go
+
+      ## test  ----------------------------------
+      - run: go test -v github.com/matsu0228/gotest/tips
+      - run: go test -v github.com/matsu0228/gotest/integrate
+      - run: go test -v github.com/matsu0228/gotest/integrate/repository
+      - run: go test -v -tags=integration github.com/matsu0228/gotest/integrate/repository
+      # - run: go test -v -race ./...
+      
+      ## metalinter -----------------------------
+      - run: go get golang.org/x/lint/golint
+      - run: go get github.com/haya14busa/goverage
+      - run: golint ./...
+      - run: go vet ./...

@@ -23,7 +23,7 @@ func setup() {
 
 	if integrateFlag { // setup when execute integrat test
 		var err error
-		repo, err = NewDatabase("root", "mysql", "docker-mysql", "3306", "todo", "?parseTime=true&loc=Japan")
+		repo, err = NewDatabase("root", "mysql", "127.0.0.1", "3306", "todo", "?parseTime=true&loc=Japan")
 		if err != nil {
 			log.Fatal(err)
 		}
