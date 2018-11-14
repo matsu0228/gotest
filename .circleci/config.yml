@@ -18,13 +18,15 @@ jobs:
       # specify any bash command here prefixed with `run: `
       - run: go get -u github.com/golang/dep/cmd/dep
       ##  debug --------------------------------
-      - run: pwd
-      - run: echo $GOPATH
+      # - run: pwd
+      # - run: echo $GOPATH
       # - run: dep ensure -v
 
       ## test  ----------------------------------
       - run: go test -v github.com/matsu0228/gotest/tips
       - run: go test -v github.com/matsu0228/gotest/integrate
+      - run: go test -v github.com/matsu0228/gotest/integrate/repository
+      - run: go test -v -tags=integrate github.com/matsu0228/gotest/integrate/repogitory
       # - run: go test -v -race ./...
       
       ## metalinter -----------------------------
