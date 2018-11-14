@@ -23,8 +23,8 @@ jobs:
       # - run: dep ensure -v
 
       ## test  ----------------------------------
-      - run: go test -v github.com/nttresonant/matsu0228/gotest/tips
-      - run: go test -v github.com/nttresonant/matsu0228/gotest/integrate
+      - run: go test -v github.com/matsu0228/gotest/tips
+      - run: go test -v github.com/matsu0228/gotest/integrate
       # - run: go test -v -race ./...
       
       ## metalinter -----------------------------
