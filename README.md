@@ -1,5 +1,7 @@
 # gotest
 
+[![CircleCI](https://circleci.com/gh/matsu0228/gotest.svg?style=svg)](https://circleci.com/gh/matsu0228/gotest)
+
 * this repository contains examples for testing method of golang.
 
 ## tips
