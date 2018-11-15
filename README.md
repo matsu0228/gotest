@@ -28,6 +28,9 @@ go get github.com/matsu0228/gotest
 # build mysql on your environment
 cd $GOPATH/src/github.com/matsu0228/gotest/infla
 docker-compose up -d
+
+# create dabatase/table
+go run init/main.go
 ```
 
 * exercise of some tests
