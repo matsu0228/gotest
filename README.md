@@ -3,6 +3,7 @@
 [![CircleCI](https://circleci.com/gh/matsu0228/gotest.svg?style=svg)](https://circleci.com/gh/matsu0228/gotest)
 
 * this repository contains examples for testing method of golang.
+* [document at Qiita (japanese)](https://qiita.com/matsu0228/items/c9f69b036f0ab47b617e)
 
 ## tips
 
